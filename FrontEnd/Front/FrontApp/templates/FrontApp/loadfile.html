@@ -1,5 +1,61 @@
-<html>
-    <body>
-        Load File
-    </body>
-</html>
+
+{% extends "FrontApp/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="jumbotron top-space">
+		<div class="container">
+
+			
+			
+			<div class="row">
+
+
+
+
+				<div class="wrap">
+               
+                   
+                
+                    <div class="col-12 tm-carousel">   
+                        <div class="secciones">
+                
+                        <div class="tm-bg-black-transparent tm-testimonial-box text-center">  
+                                              
+                            <article id="tab1">
+                                <h1>Carga Masiva</h1>
+                                <p>
+                                  <label for="avatar">Elija Archivo a Cargar</label>
+                                </p>
+                                <p>
+                                  <input type="file"
+                                   id="carga" name="carga"
+                                   accept=".xml">
+                                   <br>
+                                   <button class="btn btn-outline-success btn-sm" onclick="cargar()">Cargar</button>
+                                </p>
+                            </article>
+                        </div>
+                
+                        </div>        
+                  </div>
+                
+                
+                
+                
+                </div>
+
+
+
+
+			</div> <!-- /row  -->
+		
+		</div>
+	</div>
+
+
+
+{% endblock %}
