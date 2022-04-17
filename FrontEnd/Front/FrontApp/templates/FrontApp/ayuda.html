@@ -1,0 +1,55 @@
+
+{% extends "FrontApp/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+<!-- Highlights - jumbotron -->
+<div class="jumbotron top-space">
+    <div class="container">
+
+        
+			<a class="btn btn-action btn-lg" role="button">PDF</a></p>
+
+        
+            <div class="wrap">
+                <ul class="tabs">
+                    <li><a href="#tab1"><span class="fa fa-home"></span><span class="tab-text">Información</span></a></li>
+                    <li><a href="#tab2"><span class="fa fa-group"></span><span class="tab-text">Documentación</span></a></li>
+                </ul>
+        
+                <div class="secciones">
+                    <article id="tab1">
+                        <h1>Datos del estudiante</h1>
+                        <br>
+                        <P>Saúl Alfredo Barbero Contreras</P>
+                        <P>201809935</P>
+                        <P>201809935@ingenieria.usac.edu.gt</P>
+                        
+                    </article>
+                    <article id="tab2">
+                        <h1>Documentación</h1>
+
+                        <div class='embed-responsive container'  style='padding-bottom:0%'>
+                            <embed src="{% static 'FrontApp/pdf/IPC2-Proyecto3-v2.pdf' %} #zoom=80" type="application/pdf" width="100%" height="500px" />
+                        </div>
+
+
+
+                    </article>
+                    
+                    
+                </div>
+            </div>
+        
+        
+        
+    
+    </div>
+</div>
+<!-- /Highlights -->
+
+
+{% endblock %}
