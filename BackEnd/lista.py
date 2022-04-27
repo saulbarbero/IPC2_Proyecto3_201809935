@@ -34,9 +34,11 @@ class lista:
     def dequeue(self):
         
         if self.tam == 1:
+            temp = self.primero.dato
             self.primero = self.ultimo = None
-            return
+            return temp
 
+        temp = self.primero.dato
         aux = self.primero.siguiente
         aux.anterior = None
         self.primero.siguiente = None
@@ -44,10 +46,7 @@ class lista:
 
         self.tam -= 1
 
-
-        print(f'Eliminado Orden#: {aux.dato.id}')
-
-        return aux
+        return temp
 
     def pop(self):
         aux = self.ultimo

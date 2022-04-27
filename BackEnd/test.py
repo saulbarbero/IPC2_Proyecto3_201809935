@@ -10,10 +10,10 @@ empresas = lista()
 def llenarData():
     recurso = Recurso(positivos, negativos, mensajes, empresas)
     recurso.obtenerData('entrada.xml')
-    positivos.printLista()
-    negativos.printLista()
-    mensajes.printLista()
-    empresas.printLista()
+
+    testMensaje = mensajes.primero.dato
+    testMensaje.contentToList()
+
     print('')
 
 
