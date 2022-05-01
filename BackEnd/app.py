@@ -1,5 +1,6 @@
 from flask import Flask, make_response, request, jsonify
 from Recurso import Recurso
+import xmltodict
 
 app = Flask(__name__)
 
@@ -10,9 +11,9 @@ def welcome():
 
 @app.route("/api/data",methods=['POST'])
 def processingFile():
-    data = request.get_data()
+    content = xmltodict.parse(request.get_data())
     
-    return make_response(data, 200)
+    return make_response(content, 200)
 
 
 
