@@ -104,10 +104,11 @@ class lista:
             return
 
         pivote = self.primero
+        i = 0
         while(pivote != None):
-            print(f'Dato: {pivote.dato}')
+            print(f'i: {i} Dato: {pivote.dato}')
             pivote = pivote.siguiente
-
+            i += 1
 
         print('########################################')
 

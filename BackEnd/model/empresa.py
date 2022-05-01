@@ -1,8 +1,8 @@
-from lista import lista
+from edd.lista import lista
 
 class Empresa:
     def __init__(self, nombre = ""):
-        self.nombre = nombre
+        self.nombre = nombre.lower()
         self.bueno = 0
         self.malo = 0
         
@@ -17,7 +17,7 @@ class Empresa:
 
 class Servicio:
     def __init__(self, nombre):
-        self.nombre = nombre
+        self.nombre = nombre.lower()
         self.alias = lista()
         self.bueno = 0
         self.malo = 0

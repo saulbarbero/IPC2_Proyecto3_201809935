@@ -9,7 +9,7 @@ empresas = lista()
 
 def llenarData():
     recurso = Recurso(positivos, negativos, mensajes, empresas)
-    recurso.obtenerData('entrada.xml')
+    recurso.obtenerData('BackEnd/entrada.xml')
 
     testMensaje = mensajes.primero.dato
     testMensaje.contentToList()

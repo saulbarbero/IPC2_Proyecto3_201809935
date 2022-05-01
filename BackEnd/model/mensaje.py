@@ -1,4 +1,4 @@
-from lista import lista
+from edd.lista import lista
 
 
 
