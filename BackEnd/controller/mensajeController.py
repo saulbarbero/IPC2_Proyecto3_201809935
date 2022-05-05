@@ -1,3 +1,4 @@
+from regex import P
 from edd.lista import Nodo
 from model.empresa import Empresa
 from edd.lista import lista
@@ -26,13 +27,14 @@ class MensajeController:
         recurso = Recurso(positivos, negativos, mensajes, empresas)
         recurso.obtenerDataText(text)
 
-    def analizarEntrada(self):
+    def analizarEntrada(self)->str:
         
 
         pivote = mensajes.primero
-
+        flagError = False
         while pivote:
-
+            self.positivos = 0
+            self.negativos = 0
             mensaje = pivote.dato.content
 
             self.encontrarPalabras(mensaje, 0)
@@ -42,7 +44,8 @@ class MensajeController:
 
             if self.nodoServicio == None and self.nodoEmpresa == None:
                 print(' error inesperado ')
-                continue
+                flagError = True
+                break
             
 
             if self.nodoServicio == None:
@@ -61,6 +64,59 @@ class MensajeController:
 
             
             pivote = pivote.siguiente
+
+
+
+        if flagError:
+            return "Error"
+        else:
+            printTo = self.resultToJson()
+
+            print(printTo)
+            return printTo
+
+
+
+    def resultToJson(self)->str:
+        buffer = "[\n"
+
+        pivoteEmpresa = empresas.primero
+
+        while pivoteEmpresa: 
+
+            buffer += "{\n"
+            buffer += f'"nombre": "{pivoteEmpresa.dato.nombre}",\n'
+            buffer += f'"positivos": {pivoteEmpresa.dato.bueno},\n'
+            buffer += f'"negativos": {pivoteEmpresa.dato.malo},\n'
+            buffer += f'"servicios": [\n'
+
+            pivoteServicio = pivoteEmpresa.dato.servicios.primero
+            while pivoteServicio:
+                buffer += "{\n"
+                buffer += f'"nombre": "{pivoteServicio.dato.nombre}",\n'
+                buffer += f'"positivos": {pivoteServicio.dato.bueno},\n'
+                buffer += f'"negativos": {pivoteServicio.dato.malo}\n'
+
+                buffer += "\n}" #coma
+
+                if pivoteServicio.siguiente != None:
+                    buffer += ",\n"
+
+                pivoteServicio = pivoteServicio.siguiente
+
+            buffer += "\n]"
+
+            buffer += "\n}" #coma
+            if pivoteEmpresa.siguiente != None:
+                buffer += ",\n"
+
+
+            pivoteEmpresa = pivoteEmpresa.siguiente
+
+
+        buffer += "]"
+
+        return buffer
 
 
     def encontrarPalabras(self, input:str, type:int)->None:

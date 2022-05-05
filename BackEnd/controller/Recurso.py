@@ -51,17 +51,17 @@ class Recurso:
         for palabra in root:
             temporal = palabra.text
             temporal = temporal.strip()
-            self.lpositivos.insertar(temporal)
+            self.lpositivos.insertar(self.removerAcentos(temporal))
     
     def capturarSentimientosNegativos(self, root):
         for palabra in root:
             temporal = palabra.text
             temporal = temporal.strip()
-            self.lnegativos.insertar(temporal)
+            self.lnegativos.insertar(self.removerAcentos(temporal))
 
     def capturarEmpresa(self, root):
-        empresa = Empresa()
         for e in root:
+            empresa = Empresa()
             for c in e:
                 if c.tag == "nombre":
                     temp = str(c.text.replace(' ', ""))
@@ -99,7 +99,12 @@ class Recurso:
 
         lugarFecha = temp[0].split(':', 1)
         fecha = lugarFecha[1].split(',')[1] # datetime
-        msg = temp[3]
+
+        i = 3
+        msg = ""
+        while i < len(temp):
+            msg += temp[i]
+            i += 1
         msg = self.removerAcentos(msg)
         self.lmensajes.insertar(Mensaje(fecha, msg))
 

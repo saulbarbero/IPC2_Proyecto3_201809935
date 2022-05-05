@@ -41,34 +41,33 @@
                             <table class="table table-bordered">
                               <thead>
                                 <tr>
-                                  <th>Firstname</th>
-                                  <th>Lastname</th>
-                                  <th>Date</th>
+                                  <th>Nombre</th>
+                                  <th>Positvo</th>
+                                  <th>Negativo</th>
                                 </tr>
                               </thead>
                               <tbody id="myTable">
+                               <!-- <ul>
+                                  {%for prueba in ObjetoPruebas %}
+                                  <li>{{prueba.nombre}}</li>
+                                  <li>{{prueba.positivos}}</li>
+                                  <li>{{prueba.negativos}}</li>
+                                  {%endfor%}
+                                </ul>
+                                -->
+                                {%for prueba in ObjetoPruebas %}
                                 <tr>
-                                  <td>John</td>
-                                  <td>Doe</td>
-                                  <td>11/02/2020</td>
+                                  
+                                  <td>{{prueba.nombre}}</td>
+                                  <td>{{prueba.positivos}}</td>
+                                  <td>{{prueba.negativos}}</td>
+                                  
                                 </tr>
-                                <tr>
-                                  <td>Mary</td>
-                                  <td>Moe</td>
-                                  <td>30/12/2022</td>
-                                </tr>
-                                <tr>
-                                  <td>July</td>
-                                  <td>Dooley</td>
-                                  <td>09/09/2022</td>
-                                </tr>
-                                <tr>
-                                  <td>Anja</td>
-                                  <td>Ravendale</td>
-                                  <td>11/12/2022</td>
-                                </tr>
+                                {%endfor%}
+                                
                               </tbody>
                             </table>
+                           
                             
                             <p>Note that we start the search in tbody, to prevent filtering the table headers.</p>
                           </div>
