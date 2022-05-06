@@ -19,10 +19,34 @@ def processingFile():
         return make_response(f'{"Error": "Se encontro un error en el analisis"}', 500)
     
 
-    return jsonify(json.loads(result))
-    # return make_response(, 200)
+    response = make_response(result, 200)
+    response.mimetype = "text/plain"
 
+    return response
+    # return make_response(, 200)
 
 @app.route("/prueba", methods=["GET"])
 def getPrueba():
-    return jsonify([{'nombre': 'usac', 'positivos': 10, 'negativos': 20}, {'nombre': 'calusac', 'positivos': 5, 'negativos': 4}])
+    return jsonify([{'nombre': 'usac', 'totalMensajes': 10,'positivos': 10, 'negativos': 20,'neutrales': 20}, {'nombre': 'calusac', 'totalMensajes': 1,'positivos': 100, 'negativos': 5,'neutrales': 28}])
+
+
+
+@app.route("/xml", methods=["POST"])
+def getXml():
+    body=request.get_json()
+    xml=body['xml']
+
+    return jsonify({'xmlProcesado':processXml(xml)})
+
+
+def processXml(xml):
+    return xml
+
+
+@app.route("/palabra", methods=["POST"])
+def parseInfo():
+    body=request.get_json()
+    texto = body[texto]
+    print(texto)
+    response="la respuesta del proces"
+    return {'data':response}

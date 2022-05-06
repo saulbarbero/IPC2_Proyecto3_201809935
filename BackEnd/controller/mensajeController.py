@@ -19,6 +19,10 @@ class MensajeController:
         self.negativos = 0
         self.input = text
 
+        self.mPositivos =0 
+        self.mNegativos =0 
+        self.mNeutrales =0 
+
         self.setData(self.input)
 
 
@@ -51,17 +55,37 @@ class MensajeController:
             if self.nodoServicio == None:
                 #el mensaje habla sobre la empresa directamente
                 empresa = self.nodoEmpresa.dato
-                empresa.bueno += self.positivos
-                empresa.malo += self.negativos
+
+                if self.positivos > self.negativos:
+                    empresa.bueno += 1
+                elif self.positivos == self.negativos:
+                    empresa.neutral += 1
+                else:
+                    empresa.malo += 1
 
                 self.nodoEmpresa.dato = empresa
             else:
                 # el mensaje habla sobre el servicio
                 servicio = self.nodoServicio.dato
-                servicio.bueno += self.positivos
-                servicio.malo += self.negativos
+                if self.positivos > self.negativos:
+                    servicio.bueno += 1
+                elif self.positivos == self.negativos:
+                    servicio.neutral += 1
+                else:
+                    servicio.malo += 1
+
                 self.nodoServicio.dato = servicio
 
+
+
+            if self.positivos == self.negativos:
+                self.mNeutrales += 1
+            elif self.positivos > self.negativos:
+                self.mPositivos += 1
+            else:
+                self.mNegativos += 1
+
+            
             
             pivote = pivote.siguiente
 
@@ -70,10 +94,72 @@ class MensajeController:
         if flagError:
             return "Error"
         else:
-            printTo = self.resultToJson()
+            printTo = self.resultToXml()
 
             print(printTo)
             return printTo
+
+    def resultToXml(self)->str:
+
+        pivoteEmpresa  = empresas.primero
+
+        buffer = "<lista_respuesta>"
+        # vista general
+        buffer += "\n<respuesta>"
+        buffer += "\n<fecha>"
+            #poner la fecha aqui
+        buffer += "\n</fecha>"
+        buffer += f'\n<mensajes>'
+        buffer += f'\n<total> {self.mNegativos + self.mPositivos + self.mNeutrales} </total>'
+        buffer += f'\n<positivos> {self.mPositivos} </positivos>'
+        buffer += f'\n<negativos> {self.mNegativos} </negativso>'
+        buffer += f'\n<neutrales> {self.mNeutrales} </neutrales>'
+        buffer += f'\n</mensajes>'
+
+        buffer += "\n<analisis>"
+        while pivoteEmpresa:
+            
+            empresa = pivoteEmpresa.dato
+            buffer += f'\n<empresa nombre ="{empresa.nombre}">'
+            buffer += f'\n<mensajes>'
+            buffer += f'\n<total> {empresa.bueno + empresa.malo + empresa.neutral} </total>'
+            buffer += f'\n<positivos> {empresa.bueno} </positivos>'
+            buffer += f'\n<negativos> {empresa.malo} </negativos>'
+            buffer += f'\n<neutrales> {empresa.neutral} </neutrales>'
+            buffer += f'\n</mensajes>'
+
+            buffer += f'\n<servicios>'
+            pivoteServicio = pivoteEmpresa.dato.servicios.primero
+
+            while pivoteServicio:
+
+                servicio = pivoteServicio.dato
+                buffer += f'\n<servicio nombre="{servicio.nombre}">'
+                buffer += f'\n<mensajes>'
+
+                buffer += f'\n<total> {servicio.bueno + servicio.malo + servicio.neutral} </total>'
+                buffer += f'\n<positivos> {servicio.bueno} </positivos>'
+                buffer += f'\n<negativos> {servicio.malo} </negativos>'
+                buffer += f'\n<neutrales> {servicio.neutral} </neutrales>'
+
+                buffer += f'\n</mensajes>'
+                buffer += f'\n</servicio>'
+
+                pivoteServicio = pivoteServicio.siguiente
+
+            buffer += f'\n</servicios>'
+
+            pivoteEmpresa = pivoteEmpresa.siguiente
+
+        # aqui poner todo el contenido de las edd 
+
+
+
+        buffer += "\n</analisis>"
+        buffer += "\n</respuesta>"
+        buffer += '</lista_respuesta>'
+
+        return buffer
 
 
 

@@ -9,122 +9,139 @@
     <div class="container">
 
         
-			<a class="btn btn-action btn-lg" role="button">PDF</a></p>
+			<a href="{% url 'pdf_prueba' %}"class="btn btn-action btn-lg" role="button">PDF</a></p>
+      <a href="{% url 'Eliminar_Prueba' %}" class="btn btn-action btn-lg" role="button">Reset</a></p>
 
+        
+           
         
             <div class="wrap">
-                <ul class="tabs">
-                    <li><a href="#tab1"><span class="fa fa-home"></span><span class="tab-text">Datos</span></a></li>
-                    <li><a href="#tab2"><span class="fa fa-group"></span><span class="tab-text">Clasificación</span></a></li>
-                    <li><a href="#tab3"><span class="fa fa-briefcase"></span><span class="tab-text">Rango</span></a></li>
-                    
-                </ul>
-        
-                <div class="secciones">
-                    <article id="tab1">
-                        <h1>Consultar Datos</h1>
-                        <div class="form-floating">
-                            <textarea class="form-control" placeholder="OUTPUT" id="floatingTextarea2" style="height: 100px"></textarea>
-                            <label for="floatingTextarea2">Datos</label>
-                          </div>
-                    </article>
-                    <article id="tab2">
-                        <h1>Clasificación por fecha</h1>
+              <ul class="tabs">
+                  
+                  <li><a href="#tab2"><span class="fa fa-group"></span><span class="tab-text">Clasificación</span></a></li>
+                  
+                  
+              </ul>
+      
+              <div class="secciones">
+                  
+                  <article id="tab2">
+                      <h1>Clasificación por fecha</h1>
 
 
-                        <div class="container mt-3">
-                            <h2>Filterable Table</h2>
-                            <p>Type something in the input field to search the table for first names, 
-                            last names or emails:</p>  
-                            <input class="form-control" id="myInput" type="text" placeholder="Search..">
-                            <br>
-                            <table class="table table-bordered">
-                              <thead>
-                                <tr>
-                                  <th>Nombre</th>
-                                  <th>Positvo</th>
-                                  <th>Negativo</th>
-                                </tr>
-                              </thead>
-                              <tbody id="myTable">
-                               <!-- <ul>
-                                  {%for prueba in ObjetoPruebas %}
-                                  <li>{{prueba.nombre}}</li>
-                                  <li>{{prueba.positivos}}</li>
-                                  <li>{{prueba.negativos}}</li>
-                                  {%endfor%}
-                                </ul>
-                                -->
-                                {%for prueba in ObjetoPruebas %}
-                                <tr>
-                                  
-                                  <td>{{prueba.nombre}}</td>
-                                  <td>{{prueba.positivos}}</td>
-                                  <td>{{prueba.negativos}}</td>
-                                  
-                                </tr>
-                                {%endfor%}
+                      <div class="container mt-3">
+                          <h2>Filterable Table</h2>
+                          <p>Type something in the input field to search the table for first names, 
+                          last names or emails:</p>  
+                          <input class="form-control" id="myInput" type="text" placeholder="Search..">
+                          <br>
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th>Nombre</th>
+                                <th>Total</th>
+                                <th>Positvo</th>
+                                <th>Negativo</th>
+                                <th>Neutro</th>
                                 
-                              </tbody>
-                            </table>
-                           
-                            
-                            <p>Note that we start the search in tbody, to prevent filtering the table headers.</p>
-                          </div>
+                              </tr>
+                            </thead>
+                            <tbody id="myTable">
+                             <!-- <ul>
+                                {%for prueba in ObjetoPruebas %}
+                                <li>{{prueba.nombre}}</li>
+                                <li>{{prueba.positivos}}</li>
+                                <li>{{prueba.negativos}}</li>
+                                {%endfor%}
+                              </ul>
+                              -->
+                              {%for prueba in SentimientosEmpresa %}
+                              <tr>
+                                
+                                <td>{{prueba.nombre}}</td>
+                                <td>{{prueba.totalMensajes}}</td>
+                                <td>{{prueba.positivos}}</td>
+                                <td>{{prueba.negativos}}</td>
+                                <td>{{prueba.neutrales}}</td>
+                                
+                              </tr>
+                              {%endfor%}
+                              
+                            </tbody>
+                          </table>
+                         
+                          
+                          <p>Note that we start the search in tbody, to prevent filtering the table headers.</p>
+                        </div>
 
 
-                     </article>
-                    <article id="tab3">
-                        <h1>Rango por fecha</h1>
-
-
-
-                        <p>Type something in the input field to search the table for first names, 
-                            last names or emails:</p>  
-                            <input class="form-control" id="myInput" type="text" placeholder="Search..">
-                            <br>
-                            <table class="table table-bordered">
-                              <thead>
-                                <tr>
-                                  <th>Firstname</th>
-                                  <th>Lastname</th>
-                                  <th>Date</th>
-                                </tr>
-                              </thead>
-                              <tbody id="myTable">
-                                <tr>
-                                  <td>John</td>
-                                  <td>Doe</td>
-                                  <td>11/02/2020</td>
-                                </tr>
-                                <tr>
-                                  <td>Mary</td>
-                                  <td>Moe</td>
-                                  <td>30/12/2022</td>
-                                </tr>
-                                <tr>
-                                  <td>July</td>
-                                  <td>Dooley</td>
-                                  <td>09/09/2022</td>
-                                </tr>
-                                <tr>
-                                  <td>Anja</td>
-                                  <td>Ravendale</td>
-                                  <td>11/12/2022</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                            
-                            <p>Note that we start the search in tbody, to prevent filtering the table headers.</p>
+                   </article>
+                 
+                  
+              </div>
+          </div>
+      
+          <div class="wrap">
+            <ul class="tabs">
+              
+                <li><a href="#tab3"><span class="fa fa-briefcase"></span><span class="tab-text">Rango</span></a></li>
+                
+            </ul>
+    
+            <div class="secciones">
+                
+                <article id="tab3">
+                    <h1>Rango por fecha</h1>
 
 
 
-                    </article>
-                    
-                </div>
+                    <p>Type something in the input field to search the table for first names, 
+                        last names or emails:</p>  
+                        <input class="form-control" id="myInput" type="text" placeholder="Search..">
+                        <br>
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th>Nombre</th>
+                              <th>Total</th>
+                              <th>Positvo</th>
+                              <th>Negativo</th>
+                              <th>Neutro</th>
+                              
+                            </tr>
+                          </thead>
+                          <tbody id="myTable">
+                           <!-- <ul>
+                              {%for prueba in ObjetoPruebas %}
+                              <li>{{prueba.nombre}}</li>
+                              <li>{{prueba.positivos}}</li>
+                              <li>{{prueba.negativos}}</li>
+                              {%endfor%}
+                            </ul>
+                            -->
+                            {%for prueba in SentimientosEmpresa %}
+                            <tr>
+                              
+                              <td>{{prueba.nombre}}</td>
+                              <td>{{prueba.totalMensajes}}</td>
+                              <td>{{prueba.positivos}}</td>
+                              <td>{{prueba.negativos}}</td>
+                              <td>{{prueba.neutrales}}</td>
+                              
+                            </tr>
+                            {%endfor%}
+                          </tbody>
+                        </table>
+                        
+                        <p>Note that we start the search in tbody, to prevent filtering the table headers.</p>
+
+
+
+                </article>
+                
             </div>
-        
-        
+        </div>
+    
         
     
     </div>
