@@ -5,6 +5,7 @@ class Empresa:
         self.nombre = nombre.lower()
         self.bueno = 0
         self.malo = 0
+        self.neutral = 0
         
         self.servicios = lista()
 
@@ -21,6 +22,7 @@ class Servicio:
         self.alias = lista()
         self.bueno = 0
         self.malo = 0
+        self.neutral = 0
 
     def __str__(self):
         # salida  = self.nombre
